@@ -1,0 +1,6 @@
+.text-error {
+    color: red; /* Makes error messages red */
+    font-size: 0.875rem; /* Adjust font size */
+    margin-top: 0.25rem; /* Adds spacing above the message */
+  }
+  

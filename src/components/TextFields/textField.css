@@ -1,0 +1,12 @@
+.common-textfield-wrapper {
+    margin-bottom: 1rem;
+  }
+  
+  .required-field {
+    border-color: red;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
