@@ -1,5 +1,5 @@
 import React from "react";
-import "./TextError.css"; // Optional CSS for styling the error message
+import "./TextError.css"; 
 
 type TextErrorProps = {
   children?: React.ReactNode; // Error message content

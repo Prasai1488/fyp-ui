@@ -1,5 +1,6 @@
 import "./App.css";
 import Button from "./components/Buttons/Button";
+import Login from "./pages/Login/Login";
 
 function App() {
   const handleSubmit = () => {
@@ -8,13 +9,7 @@ function App() {
 
   return (
     <>
-      <div className="container mt-5">
-        <h1>Reusable Submit Button</h1>
-
-        {/* Default size button */}
-        <Button label="Default Button"  onClick={handleSubmit} />
-
-      </div>
+     <Login/>
     </>
   );
 }
