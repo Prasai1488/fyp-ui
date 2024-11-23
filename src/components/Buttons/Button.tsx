@@ -1,8 +1,8 @@
 import "./button.css";
 
 // Define props for the component
-interface ButtonProps {
-  label?: string;
+type ButtonProps = {
+  label: string;
   btnType: "submit" | "button" | "reset";
   size?: "small" | "large";
   disabled?: boolean;
