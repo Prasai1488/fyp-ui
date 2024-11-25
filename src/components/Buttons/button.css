@@ -4,7 +4,7 @@
     color: white !important; 
     border: none !important; 
     transition: transform 0.2s ease, box-shadow 0.2s ease; 
-    width: 50%;
+    width: 100%;
   }
   
   /* Hover effect */

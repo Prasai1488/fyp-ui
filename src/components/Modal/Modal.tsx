@@ -1,45 +1,62 @@
-import React, { ReactNode } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-type ModalProps = {
+
+
+import React, { ReactNode } from 'react';
+import styles from './Modal.module.css';
+
+interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   children: ReactNode;
   size?: 'sm' | 'lg' | 'xl';
-};
+}
 
-const Modal = ({ isOpen, onClose, title, children, size }: ModalProps) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  size
+}) => {
   if (!isOpen) return null;
 
-  // Prevent click inside modal from closing it
   const handleModalClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
+  const getModalSizeClass = () => {
+    switch (size) {
+      case 'sm':
+        return styles.modalSm;
+      case 'lg':
+        return styles.modalLg;
+      case 'xl':
+        return styles.modalXl;
+      default:
+        return '';
+    }
+  };
+
   return (
-    <div
-      className="modal show d-block"
-      style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
-      onClick={onClose}
-    >
+    <div className={styles.modalOverlay} onClick={onClose}>
       <div 
-        className={`modal-dialog ${size ? `modal-${size}` : ''}`} 
+        className={`${styles.modalContainer} ${getModalSizeClass()}`}
         onClick={handleModalClick}
       >
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{title}</h5>
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={onClose}
-            />
-          </div>
-          <div className="modal-body">
-            {children}
-          </div>
+        <div className={styles.modalHeader}>
+          <h5 className={styles.modalTitle}>{title}</h5>
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <div className={styles.modalBody}>
+          {children}
         </div>
       </div>
     </div>

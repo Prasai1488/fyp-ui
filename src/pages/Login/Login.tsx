@@ -12,7 +12,7 @@ const Login = () => {
 
   const validationSchema = Yup.object({
     username: Yup.string().required("Username is required"),
-    notes: Yup.string(),
+    password: Yup.string().required("password is required"),
   });
 
   const onSubmit = (values: typeof initialValues) => {
@@ -20,8 +20,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h1>Formik TextField Example</h1>
+    <div className="container mt-0">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -36,14 +35,18 @@ const Login = () => {
             formikRequired
           />
           <TextField
-            name="notes"
-            label="Notes"
-            placeholder="Enter notes here"
-            type="text"
+            name="password"
+            label="Password"
+            placeholder="Enter your password here"
+            required
+            formikRequired
           />
-          <Button label="Default Button" btnType="submit" />
+          <Button label="Login" btnType="submit" />
         </Form>
       </Formik>
+      <p>
+        Dont have an account? <strong>register</strong>
+      </p>
     </div>
   );
 };
