@@ -4,20 +4,20 @@ import TextError from "../TextError/TextError";
 import "./textField.css";
 
 type TextFieldProps = {
-  required?: boolean; // Whether the field is required
-  formikRequired?: boolean; // If the field should have Formik's "required" styling
-  type?: string; // Input type (e.g., text, password, etc.)
-  className?: string; // Additional CSS classes
-  name: string; // Name for Formik field and ErrorMessage
-  placeholder?: string; // Placeholder text
-  label?: string; // Label text
-  isNotFormik?: boolean; // If true, Formik is not used for error handling
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // Change handler
-  readOnly?: boolean; // Whether the field is read-only
-  disabled?: boolean; // Whether the field is disabled
-  autoFocus?: boolean; // Autofocus the field
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void; // Blur handler
-  value?: string; // Value of the field
+  required?: boolean; 
+  formikRequired?: boolean; 
+  type?: string; 
+  className?: string; 
+  name: string; 
+  placeholder?: string; 
+  label?: string; 
+  isNotFormik?: boolean; 
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+  readOnly?: boolean; 
+  disabled?: boolean; 
+  autoFocus?: boolean; 
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  value?: string; 
 };
 
 const TextField = ({
