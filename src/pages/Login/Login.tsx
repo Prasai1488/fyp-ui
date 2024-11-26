@@ -1,18 +1,18 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, FormikProps } from "formik";
 import * as Yup from "yup";
-import TextField from "../../components/TextFields/TextFields";
+import { renderTextField } from "../../components/TextFields/customField"; 
 import Button from "../../components/Buttons/Button";
 
 const Login = () => {
   const initialValues = {
     username: "",
-    notes: "",
+    password: "",
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    password: Yup.string().required("password is required"),
+    username: Yup.string().required("Username is required").trim(),
+    password: Yup.string().required("Password is required"),
   });
 
   const onSubmit = (values: typeof initialValues) => {
@@ -26,26 +26,30 @@ const Login = () => {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        <Form>
-          <TextField
-            name="username"
-            label="Username"
-            placeholder="Enter your username"
-            required
-            formikRequired
-          />
-          <TextField
-            name="password"
-            label="Password"
-            placeholder="Enter your password here"
-            required
-            formikRequired
-          />
-          <Button label="Login" btnType="submit" />
-        </Form>
+        {(formik: FormikProps<typeof initialValues>) => (
+          <Form>
+            {renderTextField({
+              formik,
+              colWidth: "col-12",
+              name: "username",
+              type: "text",
+              label: "Username",
+              required: true,
+            })}
+            {renderTextField({
+              formik,
+              colWidth: "col-12",
+              name: "password",
+              type: "password",
+              label: "Password",
+              required: true,
+            })}
+            <Button label="Login" btnType="submit" />
+          </Form>
+        )}
       </Formik>
       <p>
-        Dont have an account? <strong>register</strong>
+        Don’t have an account? <strong>Register</strong>
       </p>
     </div>
   );
