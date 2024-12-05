@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, FormikProps } from "formik";
 import * as Yup from "yup";
-import { renderTextField } from "../../components/TextFields/customField"; 
+import { renderPasswordField, renderTextField } from "../../components/TextFields/customField"; 
 import Button from "../../components/Buttons/Button";
 
 const Login = () => {
+  const [passwordType, setPasswordType] = useState<"password" | "text">("password");
+
   const initialValues = {
     username: "",
     password: "",
@@ -36,20 +38,22 @@ const Login = () => {
               label: "Username",
               required: true,
             })}
-            {renderTextField({
+            {renderPasswordField({
               formik,
-              colWidth: "col-12",
+              colWidth: "12",
               name: "password",
-              type: "password",
+              type: passwordType,
               label: "Password",
               required: true,
+              setType: setPasswordType
             })}
+          
             <Button label="Login" btnType="submit" />
           </Form>
         )}
       </Formik>
       <p>
-        Don’t have an account? <strong>Register</strong>
+        Don't have an account? <strong>Register</strong>
       </p>
     </div>
   );

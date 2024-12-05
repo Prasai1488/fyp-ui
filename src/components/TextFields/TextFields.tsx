@@ -3,22 +3,25 @@ import { Field, ErrorMessage } from "formik";
 import TextError from "../TextError/TextError";
 import "./textField.css";
 
+
 type TextFieldProps = {
-  required?: boolean; 
-  formikRequired?: boolean; 
-  type?: string; 
-  className?: string; 
-  name: string; 
-  placeholder?: string; 
-  label?: string; 
-  isNotFormik?: boolean; 
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
-  readOnly?: boolean; 
-  disabled?: boolean; 
-  autoFocus?: boolean; 
+  required?: boolean;
+  formikRequired?: boolean;
+  type: string;
+  className?: string;
+  name: string;
+  placeholder?: string;
+  label?: string;
+  isNotFormik?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  readOnly?: boolean;
+  disabled?: boolean;
+  autoFocus?: boolean;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  value?: string; 
+  value?: string;
 };
+
+
 
 const TextField = ({
   required,
@@ -49,7 +52,9 @@ const TextField = ({
         id={label}
         name={name}
         placeholder={placeholder}
-        className={`form-control ${formikRequired ? "required-field" : ""} ${className}`}
+        className={`form-control ${
+          formikRequired ? "required-field" : ""
+        } ${className}`}
         onChange={onChange}
         onBlur={onBlur}
         readOnly={readOnly}
@@ -57,12 +62,11 @@ const TextField = ({
         autoFocus={autoFocus}
         value={value}
       />
-      {name === "notes" && (
-        <i className="text-danger">*Note: Every note should be separated with a period (.)</i>
-      )}
+      
       {!isNotFormik && <ErrorMessage name={name} component={TextError} />}
     </div>
   );
 };
+
 
 export default TextField;
