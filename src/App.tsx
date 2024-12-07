@@ -20,6 +20,7 @@
 import React, { useState } from 'react';
 import Modal from './components/Modal/Modal';  
 import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
 const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -37,10 +38,10 @@ const App = () => {
       <Modal 
         isOpen={isModalOpen} 
         onClose={closeModal} 
-        title="Log In To Your Account"
+        title="Create New account"
         size="lg"
       >
-       <Login/>
+       <Register/>
       </Modal>
     </div>
   );
