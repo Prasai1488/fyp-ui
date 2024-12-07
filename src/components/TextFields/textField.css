@@ -1,0 +1,29 @@
+.common-textfield-wrapper {
+    margin-bottom: 1rem;
+  }
+  
+  .required-field {
+    border-color: red;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+
+   .password-field-inside {
+    position: relative;
+  }
+  
+  .password-field-inside .fa-eye-button {
+    position: absolute;
+    right: 10px; 
+    top: 70%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .password-field-inside .MuiInputBase-root {
+    padding-right: 30px; 
+  }
+   

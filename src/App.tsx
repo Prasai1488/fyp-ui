@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// // import "./App.css";
+// import Button from "./components/Buttons/Button";
+// import Login from "./pages/Login/Login";
 
-function App() {
-  const [count, setCount] = useState(0)
+// function App() {
+//   const handleSubmit = () => {
+//     alert("button clicked");
+//   };
+
+//   return (
+//     <>
+//      <Login/>
+//     </>
+//   );
+// }
+
+// export default App;
+
+import React, { useState } from "react";
+import Modal from "./components/Modal/Modal";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+
+const App = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  const toggleModal = () => {
+    setIsLogin(!isLogin);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="container mt-5">
+      <h1>Test Modal Component</h1>
+      <button className="btn btn-primary" onClick={openModal}>
+        Open Modal
+      </button>
 
-export default App
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={isLogin ? "Login To Your Account" : "Create New Account"}
+        size="lg"
+      >
+        {isLogin ? <Login onRegisterClick = {toggleModal} /> : <Register onLoginClick = {toggleModal}/>}
+      </Modal>
+    </div>
+  );
+};
+
+export default App;
