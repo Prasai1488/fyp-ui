@@ -16,17 +16,21 @@
 
 // export default App;
 
-
-import React, { useState } from 'react';
-import Modal from './components/Modal/Modal';  
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
+import React, { useState } from "react";
+import Modal from "./components/Modal/Modal";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+
+  const toggleModal = () => {
+    setIsLogin(!isLogin);
+  };
 
   return (
     <div className="container mt-5">
@@ -35,13 +39,13 @@ const App = () => {
         Open Modal
       </button>
 
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={closeModal} 
-        title="Create New account"
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={isLogin ? "Login To Your Account" : "Create New Account"}
         size="lg"
       >
-       <Register/>
+        {isLogin ? <Login onRegisterClick = {toggleModal} /> : <Register onLoginClick = {toggleModal}/>}
       </Modal>
     </div>
   );

@@ -4,7 +4,11 @@ import * as Yup from "yup";
 import { renderPasswordField, renderTextField } from "../../components/TextFields/customField"; 
 import Button from "../../components/Buttons/Button";
 
-const Login = () => {
+type LoginProps = {
+  onRegisterClick : () => void
+}
+
+const Login = ({onRegisterClick}:LoginProps) => {
   const [passwordType, setPasswordType] = useState<"password" | "text">("password");
 
   const initialValues = {
@@ -53,7 +57,7 @@ const Login = () => {
         )}
       </Formik>
       <p>
-        Don't have an account? <strong>Register</strong>
+        Don't have an account? <strong onClick={onRegisterClick} style={{cursor:"pointer"}}>Register Here</strong>
       </p>
     </div>
   );

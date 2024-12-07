@@ -7,7 +7,11 @@ import {
 } from "../../components/TextFields/customField";
 import Button from "../../components/Buttons/Button";
 
-const Register = () => {
+type RegisterProp = {
+  onLoginClick: () => void;
+};
+
+const Register = ({onLoginClick}:RegisterProp) => {
   const [passwordType, setPasswordType] = useState<"password" | "text">(
     "password"
   );
@@ -68,7 +72,7 @@ const Register = () => {
         )}
       </Formik>
       <p>
-        Have an account? <strong>Login</strong>
+        Have an account? <strong onClick={onLoginClick} style={{cursor:"pointer"}}>Login Here</strong>
       </p>
     </div>
   );
