@@ -5,6 +5,7 @@ type ButtonProps = {
   label: string;
   btnType: "submit" | "button" | "reset";
   size?: "small" | "large";
+  width?: string;
   disabled?: boolean;
   onClick?: () => void;
 }
@@ -14,6 +15,7 @@ const Button = ({
   label = "Submit",
   btnType,
   size,
+  width,
   disabled = false,
   onClick,
 }: ButtonProps) => {
@@ -25,6 +27,7 @@ const Button = ({
     <button
       type={btnType}
       className={`btn custom-button ${sizeClass}`} // Combine base and size classes
+      style={{ width }} // Set the width of the button
       disabled={disabled}
       onClick={onClick}
     >
@@ -34,3 +37,4 @@ const Button = ({
 };
 
 export default Button;
+
