@@ -1,0 +1,129 @@
+@use "../../responsive" as *;
+
+.searchBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  .type {
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    button {
+      padding: 16px 36px;
+      border: 1px solid #ddd;
+      border-bottom: none;
+      cursor: pointer;
+      background-color: white;
+      text-transform: capitalize;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &.active {
+        background-color: #333;
+        color: white;
+      }
+
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-right: none;
+      }
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-left: none;
+      }
+    }
+  }
+
+  form {
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    @include sm {
+      flex-direction: column;
+      border: none;
+      gap: 10px;
+      box-shadow: none;
+    }
+
+    input {
+      border: none;
+      padding: 0 10px;
+      width: 200px;
+      border-right: 1px solid #ddd;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #333;
+      }
+
+      @include lg {
+        padding: 0 5px;
+
+        &:nth-child(2),
+        &:nth-child(3) {
+          width: 140px;
+        }
+      }
+
+      @include md {
+        width: 200px;
+
+        &:nth-child(2),
+        &:nth-child(3) {
+          width: 200px;
+        }
+      }
+
+      @include sm {
+        width: auto;
+
+        &:nth-child(2),
+        &:nth-child(3) {
+          width: auto;
+        }
+        padding: 20px;
+        border: 1px solid #ddd;
+      }
+    }
+
+    a {
+      flex: 1;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: linear-gradient(135deg, #feb47b, #ff7e5f);
+      }
+
+      button {
+        border: none;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+
+        @include sm {
+          padding: 10px;
+        }
+
+        img {
+          width: 32px; /* Increased the size of the icon */
+          height: 32px; /* Increased the size of the icon */
+        }
+      }
+    }
+  }
+}
