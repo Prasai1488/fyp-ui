@@ -1,54 +1,76 @@
-// // import "./App.css";
-// import Button from "./components/Buttons/Button";
-// import Login from "./pages/Login/Login";
+import HomePage from "./Routes/HomePage/HomePage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Layout, RequireAuth } from "./Routes/Layout/Layout";
+import {
+  listPageLoader,
+  profilePageLoader,
+  singlePageLoader,
+} from "./lib/loaders";
+import ListPage from "./Routes/ListPage/ListPage";
+import SinglePage from "./pages/SinglePage/SinglePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import SignIn from "./pages/SignIn/SignIn";
+import NewPostPage from "./Routes/NewPostPage/NewPostPage";
+import ProfileUpdatePage from "./Routes/ProfileUpdatePage/ProfileUpdatePage";
+import EditPostPage from "./Routes/EditPostPage/EditPostPage";
+import SignUp from "./pages/SignUp/SignUp";
 
-// function App() {
-//   const handleSubmit = () => {
-//     alert("button clicked");
-//   };
+function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/list",
+          element: <ListPage />,
+          loader: listPageLoader,
+        },
+        {
+          path: "/:id",
+          element: <SinglePage />,
+          loader: singlePageLoader,
+        },
+        {
+          path: "/login",
+          element: <SignIn />,
+        },
+        {
+          path: "/register",
+          element: <SignUp />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile",
+          element: <ProfilePage />,
+          loader: profilePageLoader,
+        },
+        {
+          path: "/add",
+          element: <NewPostPage />,
+        },
+        {
+          path: "/edit/:id",
+          element: <EditPostPage />,
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdatePage />,
+        },
+      ],
+    },
+  ]);
 
-//   return (
-//     <>
-//      <Login/>
-//     </>
-//   );
-// }
-
-// export default App;
-
-import React, { useState } from "react";
-import Modal from "./components/Modal/Modal";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-
-const App = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
-
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
-  const toggleModal = () => {
-    setIsLogin(!isLogin);
-  };
-
-  return (
-    <div className="container mt-5">
-      <h1>Test Modal Component</h1>
-      <button className="btn btn-primary" onClick={openModal}>
-        Open Modal
-      </button>
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        title={isLogin ? "Login To Your Account" : "Create New Account"}
-        size="lg"
-      >
-        {isLogin ? <Login onRegisterClick = {toggleModal} /> : <Register onLoginClick = {toggleModal}/>}
-      </Modal>
-    </div>
-  );
-};
+  return <RouterProvider router={router} />;
+}
 
 export default App;
