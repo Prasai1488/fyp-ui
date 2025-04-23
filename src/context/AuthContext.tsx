@@ -2,10 +2,12 @@ import { createContext, useEffect, useState, ReactNode } from "react";
 import apiRequest from "../lib/apiRequest";
 import type { User } from "../types/User";
 
+// Extend the context type to include updateUser
 interface AuthContextType {
   user: User | null;
   login: (userData: User) => void;
   logout: () => void;
+  updateUser: (userData: User | null) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -30,12 +32,21 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     localStorage.removeItem("user");
   };
 
+  const updateUser = (userData: User | null) => {
+    setCurrentUser(userData);
+    if (userData) {
+      localStorage.setItem("user", JSON.stringify(userData));
+    } else {
+      localStorage.removeItem("user");
+    }
+  };
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await apiRequest.get("/auth/user");
+        const response = await apiRequest.get("/user/user");
         if (response.data) {
-          login(response.data);
+          updateUser(response.data);
         }
       } catch (error) {
         console.error("Failed to fetch user data:", error);
@@ -48,9 +59,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: currentUser, login, logout }}>
+    <AuthContext.Provider
+      value={{ user: currentUser, login, logout, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
-
