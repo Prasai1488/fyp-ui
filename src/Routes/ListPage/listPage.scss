@@ -1,0 +1,63 @@
+@use "../../responsive" as *;
+
+.listPage {
+  display: flex;
+  height: 100%;
+
+  .listContainer {
+    flex: 3;
+    height: 100%;
+
+    .wrapper {
+      height: 100%;
+      padding-right: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      overflow-y: scroll;
+      padding-bottom: 50px;
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+        button {
+          padding: 10px 20px;
+          margin: 0 10px;
+          background-color: #ff7f50;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+          }
+
+          &:hover:enabled {
+            background-color: #ff6347;
+          }
+        }
+
+        span {
+          font-size: 1em;
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .mapContainer {
+    flex: 2;
+    height: 100%;
+    background-color: #fcf5f3;
+
+    @include md {
+      display: none;
+    }
+  }
+}
