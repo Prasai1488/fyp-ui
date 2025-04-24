@@ -115,7 +115,7 @@ function SignIn() {
           message: "Admin login: There might be posts waiting for approval.",
           type: "info",
         });
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else {
         setToast({
           message: "Login successful!",
