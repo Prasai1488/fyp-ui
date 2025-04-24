@@ -5,10 +5,12 @@ import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/UploadWidget/UploadWidget";
 import { useNavigate } from "react-router-dom";
+import { useToastStore } from "../../lib/useToastStore";
 
 function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState<string[]>([]);
+  const { setToast } = useToastStore();
 
   const [error, setError] = useState("");
   const [descError, setDescError] = useState("");
@@ -19,14 +21,26 @@ function NewPostPage() {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    const inputs = Object.fromEntries(formData);
+    const rawInputs = Object.fromEntries(formData.entries());
 
-    // Process the value from ReactQuill to remove <p> tags
+    const postData = {
+      title: rawInputs.title?.toString().trim(),
+      price: parseFloat(rawInputs.price as string),
+      address: rawInputs.address?.toString().trim(),
+      city: rawInputs.city?.toString().trim(),
+      bedroom: parseInt(rawInputs.bedroom as string),
+      bathroom: parseInt(rawInputs.bathroom as string),
+      type: rawInputs.type?.toString().trim(),
+      property: rawInputs.property?.toString().trim(),
+      latitude: parseFloat(rawInputs.latitude as string),
+      longitude: parseFloat(rawInputs.longitude as string),
+      images: images,
+    };
+
     const div = document.createElement("div");
     div.innerHTML = value;
-    const processedValue = div.textContent || div.innerText || "";
+    const processedValue = (div.textContent || div.innerText || "").trim();
 
-    // Check description constraints
     if (processedValue.length > 1000) {
       setDescError("Description cannot exceed 1000 characters.");
       return;
@@ -34,38 +48,42 @@ function NewPostPage() {
       setDescError("");
     }
 
+    const postDetail = {
+      desc: processedValue,
+      utilities: rawInputs.utilities?.toString().trim(),
+      pet: rawInputs.pet?.toString().trim(),
+      income: rawInputs.income?.toString().trim(),
+      size: isNaN(parseInt(rawInputs.size as string))
+        ? undefined
+        : parseInt(rawInputs.size as string),
+      school: isNaN(parseInt(rawInputs.school as string))
+        ? undefined
+        : parseInt(rawInputs.school as string),
+      bus: isNaN(parseInt(rawInputs.bus as string))
+        ? undefined
+        : parseInt(rawInputs.bus as string),
+      restaurant: isNaN(parseInt(rawInputs.restaurant as string))
+        ? undefined
+        : parseInt(rawInputs.restaurant as string),
+      propertyStatus: rawInputs.propertyStatus?.toString().trim(),
+    };
+
     try {
+      console.log("Submitting payload:", { postData, postDetail });
+
       const res = await apiRequest.post("/posts/create-property", {
-        postData: {
-          title: inputs.title,
-          price: parseInt(inputs.price as string),
-          address: inputs.address,
-          city: inputs.city,
-          bedroom: parseInt(inputs.bedroom as string),
-          bathroom: parseInt(inputs.bathroom as string),
-          type: inputs.type,
-          property: inputs.property,
-          latitude: inputs.latitude,
-          longitude: inputs.longitude,
-          images: images,
-        },
-        postDetail: {
-          desc: processedValue, // Use processed value
-          utilities: inputs.utilities,
-          pet: inputs.pet,
-          income: inputs.income,
-          size: parseInt(inputs.size as string),
-          school: parseInt(inputs.school as string),
-          bus: parseInt(inputs.bus as string),
-          restaurant: parseInt(inputs.restaurant as string),
-          propertyStatus: inputs.propertyStatus, // Add propertyStatus
-        },
+        ...postData,
+        postDetail,
       });
-      window.alert(
-        "Your post is currently under review, you will be notified from the admin if it has been rejected by any reasons."
-      );
-      navigate("/" + res.data.id);
-    } catch (err:any) {
+
+      setToast({
+        message: "Your post is under review. You’ll be notified if rejected.",
+        type: "success",
+      });
+
+      //   navigate("/" + res.data.id);
+      navigate("/profile");
+    } catch (err: any) {
       console.error(err);
       console.log(err.response?.data);
       setError("Failed to submit post. Please try again.");
@@ -152,7 +170,7 @@ function NewPostPage() {
               <label htmlFor="pet">Pet Policy</label>
               <select name="pet">
                 <option value="allowed">Allowed</option>
-                <option value="not-allowed">Not Allowed</option>
+                <option value="not allowed">Not Allowed</option>
               </select>
             </div>
             <div className="item">
