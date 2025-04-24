@@ -5,7 +5,8 @@ import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/UploadWidget/UploadWidget";
 import "./editPostPage.scss";
-import { PostItem } from "../../types/PropertyTypes"; 
+import { PostItem } from "../../types/PropertyTypes";
+import { useToastStore } from "../../lib/useToastStore";
 
 interface PostFormData {
   title: string;
@@ -22,6 +23,7 @@ interface PostFormData {
 const EditPostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { setToast } = useToastStore();
 
   const [post, setPost] = useState<PostFormData>({
     title: "",
@@ -79,28 +81,40 @@ const EditPostPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const processedValue = value.replace(/<\/?[^>]+(>|$)/g, "");
+
+    const div = document.createElement("div");
+    div.innerHTML = value;
+    const processedValue = (div.textContent || div.innerText || "").trim();
 
     try {
-      await apiRequest.put(`/posts/${id}`, {
-        postData: {
-          title: post.title,
-          price: parseInt(post.price),
-          images: images,
-        },
+      await apiRequest.put(`/posts/update-property/${id}`, {
+        title: post.title.trim(),
+        price: parseInt(post.price),
+        images: images,
         postDetail: {
           desc: processedValue,
-          income: post.income,
-          school: parseInt(post.school),
-          bus: parseInt(post.bus),
-          restaurant: parseInt(post.restaurant),
+          income: post.income.trim(),
+          school: isNaN(parseInt(post.school))
+            ? undefined
+            : parseInt(post.school),
+          bus: isNaN(parseInt(post.bus)) ? undefined : parseInt(post.bus),
+          restaurant: isNaN(parseInt(post.restaurant))
+            ? undefined
+            : parseInt(post.restaurant),
           propertyStatus: post.propertyStatus,
         },
       });
+
+      setToast({
+        message: "Post updated successfully!",
+        type: "success",
+      });
+
       navigate("/profile");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Failed to update post", err);
-      setError("Failed to update post");
+      console.log(err.response?.data);
+      setError("Failed to update post. Please check your inputs.");
     }
   };
 
