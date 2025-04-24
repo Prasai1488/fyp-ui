@@ -1,0 +1,84 @@
+.add-testimonial {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 1em;
+      color: #555;
+
+      .star-rating {
+        display: flex;
+        gap: 5px;
+        margin-top: 5px;
+
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+
+          &.on .star {
+            color: #ff7f50;
+          }
+
+          &.off .star {
+            color: #ddd;
+          }
+        }
+
+        .star {
+          font-size: 2em;
+        }
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #ff7f50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #ff6347;
+      }
+    }
+  }
+}
