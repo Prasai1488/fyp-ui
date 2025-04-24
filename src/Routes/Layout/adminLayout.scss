@@ -1,0 +1,12 @@
+.adminLayout {
+    display: flex;
+  }
+  
+  .adminMain {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    padding: 2rem;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  
