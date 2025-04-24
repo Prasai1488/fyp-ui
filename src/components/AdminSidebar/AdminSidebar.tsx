@@ -8,6 +8,7 @@ import {
   FaEdit,
   FaTrash,
   FaSignOutAlt,
+  FaClock,
 } from "react-icons/fa";
 import { useToastStore } from "../../lib/useToastStore";
 import { useContext } from "react";
@@ -42,47 +43,34 @@ const AdminSidebar = () => {
           to="/admin/dashboard"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          {" "}
-          <FaTachometerAlt /> Dashboard{" "}
+          <FaTachometerAlt /> Dashboard
         </NavLink>
         <NavLink
           to="/admin/users"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          {" "}
-          <FaUsers /> Users{" "}
+          <FaUsers /> Users
         </NavLink>
         <NavLink
           to="/admin/posts"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          {" "}
-          <FaClipboardCheck /> Posts{" "}
+          <FaClipboardCheck /> All Posts
+        </NavLink>
+        <NavLink
+          to="/admin/pending-posts"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          <FaClock /> Pending Posts
         </NavLink>
         <NavLink
           to="/admin/suspended"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          {" "}
-          <FaBan /> Suspended Users{" "}
-        </NavLink>
-        <NavLink
-          to="/admin/edit-posts"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          {" "}
-          <FaEdit /> Edit Posts{" "}
-        </NavLink>
-        <NavLink
-          to="/admin/deleted-posts"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          {" "}
-          <FaTrash /> Deleted Posts{" "}
+          <FaBan /> Suspended Users
         </NavLink>
         <button onClick={handleLogout} className="logoutBtn">
-          {" "}
-          <FaSignOutAlt /> Logout{" "}
+          <FaSignOutAlt /> Logout
         </button>
       </nav>
     </div>
