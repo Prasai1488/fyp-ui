@@ -6,9 +6,9 @@ import {
   FaClipboardCheck,
   FaBan,
   FaEdit,
-  FaTrash,
   FaSignOutAlt,
   FaClock,
+  FaQuoteRight,
 } from "react-icons/fa";
 import { useToastStore } from "../../lib/useToastStore";
 import { useContext } from "react";
@@ -37,42 +37,89 @@ const AdminSidebar = () => {
 
   return (
     <div className="adminSidebar">
-      <h2>Admin Panel</h2>
-      <nav>
+      <div className="sidebarHeader">
+        <h2>Admin Panel</h2>
+      </div>
+      <nav className="sidebarNav">
         <NavLink
           to="/admin/dashboard"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          <FaTachometerAlt /> Dashboard
+          <div className="iconWrapper">
+            <FaTachometerAlt />
+          </div>
+          <span>Dashboard</span>
         </NavLink>
         <NavLink
           to="/admin/users"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          <FaUsers /> Users
+          <div className="iconWrapper">
+            <FaUsers />
+          </div>
+          <span>Users</span>
         </NavLink>
         <NavLink
           to="/admin/posts"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          <FaClipboardCheck /> All Posts
+          <div className="iconWrapper">
+            <FaClipboardCheck />
+          </div>
+          <span>All Posts</span>
         </NavLink>
         <NavLink
           to="/admin/pending-posts"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          <FaClock /> Pending Posts
+          <div className="iconWrapper">
+            <FaClock />
+          </div>
+          <span>Pending Posts</span>
         </NavLink>
+
+        <div className="sidebarDivider"></div>
+
+        <NavLink
+          to="/admin/pending-testimonials"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          <div className="iconWrapper">
+            <FaEdit />
+          </div>
+          <span>Pending Testimonials</span>
+        </NavLink>
+        <NavLink
+          to="/admin/testimonials"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          <div className="iconWrapper">
+            <FaQuoteRight />
+          </div>
+          <span>All Testimonials</span>
+        </NavLink>
+
+        <div className="sidebarDivider"></div>
+
         <NavLink
           to="/admin/suspended"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          <FaBan /> Suspended Users
+          <div className="iconWrapper">
+            <FaBan />
+          </div>
+          <span>Suspended Users</span>
         </NavLink>
-        <button onClick={handleLogout} className="logoutBtn">
-          <FaSignOutAlt /> Logout
-        </button>
       </nav>
+
+      <div className="sidebarFooter">
+        <button onClick={handleLogout} className="logoutBtn">
+          <div className="iconWrapper">
+            <FaSignOutAlt />
+          </div>
+          <span>Logout</span>
+        </button>
+      </div>
     </div>
   );
 };
