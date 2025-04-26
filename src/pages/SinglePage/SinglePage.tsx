@@ -83,7 +83,7 @@ const SinglePage: React.FC = () => {
               <div className="post">
                 <h1>{post.title}</h1>
                 <div className="address">
-                  <img src="/pin.png" alt="" />
+                  <img src="../../../public copy/pin.png" alt="" />
                   <span>{post.address}</span>
                 </div>
                 <div className="price">$ {post.price}</div>
@@ -110,7 +110,7 @@ const SinglePage: React.FC = () => {
           <p className="title">General</p>
           <div className="listVertical">
             <div className="feature">
-              <img src="/utility.png" alt="" />
+              <img src="../../../public copy/utility.png" alt="" />
               <div className="featureText">
                 <span>Utilities</span>
                 {post.postDetail?.utilities === "owner" ? (
@@ -121,7 +121,7 @@ const SinglePage: React.FC = () => {
               </div>
             </div>
             <div className="feature">
-              <img src="/pet.png" alt="" />
+              <img src="../../../public copy/pet.png" alt="" />
               <div className="featureText">
                 <span>Pet Policy</span>
                 {post.postDetail?.pet === "allowed" ? (
@@ -132,7 +132,7 @@ const SinglePage: React.FC = () => {
               </div>
             </div>
             <div className="feature">
-              <img src="/fee.png" alt="" />
+              <img src="../../../public copy/fee.png" alt="" />
               <div className="featureText">
                 <span>Income Policy</span>
                 <p>{post.postDetail?.income}</p>
@@ -153,22 +153,22 @@ const SinglePage: React.FC = () => {
           <p className="title">Sizes</p>
           <div className="sizes">
             <div className="size">
-              <img src="/size.png" alt="" />
+              <img src="../../../public copy/size.png" alt="" />
               <span>{post.postDetail?.size} sqft</span>
             </div>
             <div className="size">
-              <img src="/bed.png" alt="" />
+              <img src="../../../public copy/bed.png" alt="" />
               <span>{post.bedroom} beds</span>
             </div>
             <div className="size">
-              <img src="/bath.png" alt="" />
+              <img src="../../../public copy/bath.png" alt="" />
               <span>{post.bathroom} bathroom</span>
             </div>
           </div>
           <p className="title">Nearby Places</p>
           <div className="listHorizontal">
             <div className="feature">
-              <img src="/school.png" alt="" />
+              <img src="../../../public copy/school.png" alt="" />
               <div className="featureText">
                 <span>School</span>
                 <p>
@@ -182,7 +182,7 @@ const SinglePage: React.FC = () => {
               </div>
             </div>
             <div className="feature">
-              <img src="/pet.png" alt="" />
+              <img src="../../../public copy/pet.png" alt="" />
               <div className="featureText">
                 <span>Bus Stop</span>
                 <p>
@@ -193,7 +193,7 @@ const SinglePage: React.FC = () => {
               </div>
             </div>
             <div className="feature">
-              <img src="/fee.png" alt="" />
+              <img src="../../../public copy/fee.png" alt="" />
               <div className="featureText">
                 <span>Restaurant</span>
                 <p>
@@ -210,7 +210,7 @@ const SinglePage: React.FC = () => {
           </div>
           <div className="buttons">
             <button onClick={handleMessage}>
-              <img src="/chat.png" alt="" />
+              <img src="../../../public copy/chat.png" alt="" />
               Send a Message
             </button>
             <button
@@ -219,7 +219,7 @@ const SinglePage: React.FC = () => {
                 backgroundColor: saved ? "#fece51" : "white",
               }}
             >
-              <img src="/save.png" alt="" />
+              <img src="../../../public copy/save.png" alt="" />
               {saved ? "Place Saved" : "Save the Place"}
             </button>
           </div>

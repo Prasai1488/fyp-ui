@@ -7,6 +7,7 @@ import { Suspense, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { PostItem } from "../../types/PropertyTypes";
 import { useToastStore } from "../../lib/useToastStore";
+import { useConfirmDialogStore } from "../../lib/useConfirmDialogStore";
 
 function ProfilePage() {
   const data = useLoaderData() as {
@@ -20,12 +21,13 @@ function ProfilePage() {
     }>;
     chatResponse: Promise<{
       data: {
-        chats: any[]; // You can replace `any` with your real Chat type if available
+        chats: any[];
       };
     }>;
   };
 
   const { updateUser, user: currentUser } = useContext(AuthContext)!;
+  const { openDialog } = useConfirmDialogStore();
 
   const navigate = useNavigate();
 
@@ -58,19 +60,25 @@ function ProfilePage() {
 
   const handleDeleteAccount = async () => {
     if (!currentUser) return;
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account? This action cannot be undone."
-    );
-    if (confirmDelete) {
-      try {
-        await apiRequest.delete(`/users/${currentUser.id}`);
-        updateUser(null);
-        window.alert("Account deleted successfully");
-        navigate("/login");
-      } catch (err) {
-        console.log("Failed to delete account", err);
+
+    openDialog(
+      "Delete Account",
+      "Are you sure you want to delete your account? This action cannot be undone.",
+      async () => {
+        try {
+          await apiRequest.delete(`/user/delete/${currentUser.id}`);
+          updateUser(null);
+          setToast({
+            message: "Account deleted successfully.",
+            type: "success",
+          });
+          navigate("/login");
+        } catch (err) {
+          console.log(err);
+          setToast({ message: "Failed to delete account.", type: "error" });
+        }
       }
-    }
+    );
   };
 
   if (!currentUser) {
