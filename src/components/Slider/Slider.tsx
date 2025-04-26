@@ -27,13 +27,17 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
       {imageIndex !== null && (
         <div className="fullSlider">
           <div className="arrow" onClick={() => changeSlide("left")}>
-            <img src="/arrow.png" alt="Left arrow" />
+            <img src="../../../public copy/arrow.png" alt="Left arrow" />
           </div>
           <div className="imgContainer">
             <img src={images[imageIndex]} alt={`Slide ${imageIndex + 1}`} />
           </div>
           <div className="arrow" onClick={() => changeSlide("right")}>
-            <img src="/arrow.png" className="right" alt="Right arrow" />
+            <img
+              src="../../../public copy/arrow.png"
+              className="right"
+              alt="Right arrow"
+            />
           </div>
           <div className="close" onClick={() => setImageIndex(null)}>
             X
@@ -41,11 +45,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
         </div>
       )}
       <div className="bigImage">
-        <img
-          src={images[0]}
-          alt="Main"
-          onClick={() => setImageIndex(0)}
-        />
+        <img src={images[0]} alt="Main" onClick={() => setImageIndex(0)} />
       </div>
       <div className="smallImages">
         {images.slice(1).map((image, index) => (

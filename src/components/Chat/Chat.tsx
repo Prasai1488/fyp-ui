@@ -123,8 +123,12 @@ const Chat: React.FC<ChatProps> = ({ chats }) => {
             onClick={() => handleOpenChat(c.id, c.receiver)}
           >
             <div className="message-content">
-              <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
-              <span>{c.receiver.username}</span>
+              <img
+                src={c.receiver?.avatar || "/noavatar.jpg"}
+                alt="User Avatar"
+              />
+              <span>{c.receiver?.username || "Unknown User"}</span>
+
               <p>{c.lastMessage}</p>
             </div>
             <button
@@ -143,8 +147,11 @@ const Chat: React.FC<ChatProps> = ({ chats }) => {
         <div className="chatBox">
           <div className="top">
             <div className="user">
-              <img src={chat.receiver.avatar || "/noavatar.jpg"} alt="" />
-              {chat.receiver.username}
+              <img
+                src={chat.receiver?.avatar || "/noavatar.jpg"}
+                alt="User Avatar"
+              />
+              {chat.receiver?.username || "Unknown User"}
             </div>
             <span className="close" onClick={() => setChat(null)}>
               X
