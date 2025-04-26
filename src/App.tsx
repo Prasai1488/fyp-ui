@@ -14,6 +14,19 @@ import NewPostPage from "./Routes/NewPostPage/NewPostPage";
 import ProfileUpdatePage from "./Routes/ProfileUpdatePage/ProfileUpdatePage";
 import EditPostPage from "./Routes/EditPostPage/EditPostPage";
 import SignUp from "./pages/SignUp/SignUp";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import AdminDashboard from "./Routes/AdminDashboard/AdminDashboard";
+import AdminGetPosts from "./Routes/AdminDashboard/AdminGetPosts";
+import AdminPendingPosts from "./Routes/AdminDashboard/AdminPendingPosts";
+import AdminLayout from "./Routes/Layout/AdminLayout";
+import AdminUsers from "./Routes/AdminDashboard/AdminUsers";
+import Testimonials from "./Routes/Testimonials/Testimonials";
+import AddTestimonial from "./Routes/Testimonials/AddTestimonials";
+import AdminPendingTestimonials from "./Routes/AdminDashboard/AdminPendingTestimonials";
+import AdminGetTestimonials from "./Routes/AdminDashboard/AdminGetTestimonials";
+import AdminProfile from "./components/AdminProfile/AdminProfile";
+import ForgotPassword from "./Routes/ForgotPassword/ForgotPassword";
+import ResetPassword from "./Routes/ForgotPassword/ResetPassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -43,6 +56,18 @@ function App() {
           path: "/register",
           element: <SignUp />,
         },
+        {
+          path: "/testimonials",
+          element: <Testimonials />,
+        },
+        {
+          path: "/forgot-password",
+          element: <ForgotPassword />,
+        },
+        {
+          path: "/reset-password/:token",
+          element: <ResetPassword />,
+        },
       ],
     },
     {
@@ -66,6 +91,30 @@ function App() {
           path: "/profile/update",
           element: <ProfileUpdatePage />,
         },
+        {
+          path: "/add-testimonial",
+          element: <AddTestimonial />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: (
+        <ProtectedRoute allowedRoles={["ADMIN"]}>
+          <AdminLayout />
+        </ProtectedRoute>
+      ),
+      children: [
+        { path: "dashboard", element: <AdminDashboard /> },
+        { path: "users", element: <AdminUsers /> },
+        { path: "posts", element: <AdminGetPosts /> },
+        { path: "pending-posts", element: <AdminPendingPosts /> },
+        { path: "pending-testimonials", element: <AdminPendingTestimonials /> },
+        { path: "testimonials", element: <AdminGetTestimonials /> },
+        { path: "profile", element: <AdminProfile /> },
+
+        // { path: "edit-posts", element: <EditPosts /> },
+        // { path: "deleted-posts", element: <DeletedPosts /> },
       ],
     },
   ]);

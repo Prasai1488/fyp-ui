@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  overflow-x: hidden; // ❌ prevents sideways scroll
+  overflow-y: auto; // ✅ allows vertical scroll
+  min-height: 100vh; // ✅ ensures content fills at least full screen
+}
