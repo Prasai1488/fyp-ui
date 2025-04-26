@@ -1,80 +1,246 @@
+// .newPostPage {
+//     height: 100%;
+//     display: flex;
+
+//     .formContainer {
+//       flex: 3;
+//       overflow: auto;
+
+//       .wrapper {
+//         margin: 30px 50px 100px 0px;
+
+//         form {
+//           display: flex;
+//           flex-direction: column;
+//           gap: 20px;
+
+//           .item {
+//             display: flex;
+//             flex-direction: column;
+//             gap: 5px;
+
+//             label {
+//             }
+
+//             input {
+//               padding: 20px;
+//               border-radius: 5px;
+//               border: 1px solid gray;
+//             }
+
+//             select {
+//               padding: 19px;
+//             }
+
+//             &.description {
+//               width: 100%;
+//               height: 320px;
+
+//               .quill > .ql-container > .ql-editor {
+//                 height: 200px;
+//                 font-size: 16px;
+//               }
+//             }
+//           }
+//           .sendButton {
+//             align-self: flex-start;
+//             width: 150px;
+//             padding: 10px;
+//             border-radius: 5px;
+//             border: none;
+//             background-color: teal;
+//             color: white;
+//             font-weight: bold;
+//             cursor: pointer;
+//           }
+//         }
+//       }
+//     }
+
+//     .sideContainer {
+//       flex: 2;
+//       background-color: #fcf5f3;
+//       display: flex;
+//       flex-direction: column;
+//       gap: 20px;
+//       align-items: center;
+//       justify-content: center;
+
+//       img {
+//         width: 50%;
+//         height: 180px;
+//         object-fit: cover;
+//         border-radius: 5px;
+//       }
+//     }
+//   }
+
+//   .error {
+//     color: red;
+//   }
+
+@use 'sass:color';
+
 .newPostPage {
-    height: 100%;
-    display: flex;
-  
-    .formContainer {
-      flex: 3;
-      overflow: auto;
-  
-      .wrapper {
-        margin: 30px 50px 100px 0px;
-  
-        form {
+  height: 100%;
+  display: flex;
+
+  .formContainer {
+    flex: 3;
+    overflow: auto;
+
+    h1 {
+      margin: 30px 50px 20px 0px;
+      color: #333;
+    }
+
+    h2 {
+      margin: 20px 0 10px;
+      color: #444;
+      font-size: 18px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .wrapper {
+      margin: 30px 50px 100px 0px;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .item {
           display: flex;
           flex-direction: column;
-          gap: 20px;
-  
-          .item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-  
-            label {
+          gap: 5px;
+
+          label {
+            font-weight: 500;
+          }
+
+          input {
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid gray;
+
+            &:focus {
+              outline: none;
+              border-color: teal;
             }
-  
-            input {
-              padding: 20px;
-              border-radius: 5px;
-              border: 1px solid gray;
+          }
+
+          select {
+            padding: 19px;
+            border-radius: 5px;
+            border: 1px solid gray;
+
+            &:focus {
+              outline: none;
+              border-color: teal;
             }
-  
-            select {
-              padding: 19px;
+          }
+
+          &.description {
+            width: 100%;
+            height: 320px;
+
+            .quill > .ql-container > .ql-editor {
+              height: 200px;
+              font-size: 16px;
             }
-  
-            &.description {
-              width: 100%;
-              height: 320px;
-  
-              .quill > .ql-container > .ql-editor {
-                height: 200px;
-                font-size: 16px;
+          }
+
+          &.amenities {
+            .checkbox-group {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 15px;
+              margin-top: 10px;
+
+              @media (max-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+              }
+
+              .checkbox-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                input[type="checkbox"] {
+                  width: 18px;
+                  height: 18px;
+                  padding: 0;
+                  cursor: pointer;
+                }
+
+                label {
+                  cursor: pointer;
+                  font-weight: normal;
+                }
               }
             }
           }
-          .sendButton {
-            align-self: flex-start;
-            width: 150px;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: teal;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
+        }
+
+        .sendButton {
+          align-self: flex-start;
+          width: 150px;
+          padding: 10px;
+          border-radius: 5px;
+          border: none;
+          background-color: teal;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: color.adjust(teal, $lightness: -5%);
           }
         }
       }
     }
-  
+  }
+
+  .sideContainer {
+    flex: 2;
+    background-color: #fcf5f3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 50%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .formContainer {
+      .wrapper {
+        margin: 20px 20px 50px 20px;
+      }
+    }
+
     .sideContainer {
-      flex: 2;
-      background-color: #fcf5f3;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-      justify-content: center;
-  
+      padding: 20px 0;
+
       img {
-        width: 50%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 5px;
+        width: 70%;
       }
     }
   }
-  
-  .error {
-    color: red;
-  }
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
