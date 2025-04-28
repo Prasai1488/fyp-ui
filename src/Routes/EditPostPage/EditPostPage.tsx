@@ -89,7 +89,8 @@ const EditPostPage: React.FC = () => {
     try {
       await apiRequest.put(`/posts/update-property/${id}`, {
         title: post.title.trim(),
-        price: parseInt(post.price),
+        price: post.price.trim(),
+
         images: images,
         postDetail: {
           desc: processedValue,
@@ -139,9 +140,10 @@ const EditPostPage: React.FC = () => {
               <input
                 id="price"
                 name="price"
-                type="number"
+                type="text"
                 value={post.price}
                 onChange={handleChange}
+                placeholder="e.g., 50,00,000 or Negotiable"
               />
             </div>
             <div className="item description">

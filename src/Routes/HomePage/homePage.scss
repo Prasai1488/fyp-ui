@@ -1,83 +1,236 @@
+// @use "../../responsive" as *;
+
+// .homePage {
+//   display: flex;
+//   height: 100%;
+
+//   .textContainer {
+//     flex: 3;
+
+//     .wrapper {
+//       padding-right: 100px;
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       gap: 50px;
+//       height: 100%;
+
+//       @include lg {
+//         padding-right: 50px;
+//       }
+
+//       @include md {
+//         padding: 0;
+//       }
+
+//       @include sm {
+//         justify-content: flex-start;
+//       }
+
+//       .title {
+//         font-size: 64px;
+
+//         @include lg {
+//           font-size: 48px;
+//         }
+//       }
+
+//       .boxes {
+//         display: flex;
+//         justify-content: space-between;
+
+//         @include sm {
+//           display: none;
+//         }
+
+//         h1 {
+//           font-size: 36px;
+
+//           @include lg {
+//             font-size: 32px;
+//           }
+//         }
+
+//         h2 {
+//           font-size: 20px;
+//           font-weight: 300;
+//         }
+//       }
+//     }
+//   }
+
+//   .imgContainer {
+//     flex: 2;
+//     background-color: #fcf5f3;
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+
+//     @include md {
+//       display: none;
+//     }
+
+//     img {
+//       width: 115%;
+//       position: absolute;
+//       right: 0;
+
+//       @include lg {
+//         width: 105%;
+//       }
+//     }
+//   }
+// }
+
+// .recommendationsSection {
+//   margin-top: 50px;
+//   padding: 20px;
+//   background-color: #f7f7f7;
+
+//   h2 {
+//     margin-bottom: 20px;
+//     font-size: 2rem;
+//     text-align: center;
+//   }
+
+//   .recommendationsGrid {
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 20px;
+//     justify-content: center;
+//   }
+// }
+
 @use "../../responsive" as *;
 
+.homePageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .homePage {
-    display: flex;
-    height: 100%;
-  
-    .textContainer {
-      flex: 3;
-  
-      .wrapper {
-        padding-right: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 50px;
-        height: 100%;
-  
-        @include lg{
-          padding-right: 50px;
-        }
-  
-        @include md{
-          padding: 0;
-        }
-  
-        @include sm{
-          justify-content: flex-start;
-        }
-  
-        .title {
-          font-size: 64px;
-  
-          @include lg {
-            font-size: 48px;
-          }
-        }
-  
-        .boxes {
-          display: flex;
-          justify-content: space-between;
-  
-          @include sm {
-            display: none;
-          }
-  
-          h1 {
-            font-size: 36px;
-  
-            @include lg {
-              font-size: 32px;
-            }
-          }
-  
-          h2 {
-            font-size: 20px;
-            font-weight: 300;
-          }
-        }
-      }
-    }
-  
-    .imgContainer {
-      flex: 2;
-      background-color: #fcf5f3;
-      position: relative;
+  display: flex;
+  min-height: 80vh;
+
+  .textContainer {
+    flex: 3;
+
+    .wrapper {
+      padding-right: 100px;
       display: flex;
-      align-items: center;
-  
-      @include md {
-        display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 50px;
+      height: 100%;
+
+      @include lg {
+        padding-right: 50px;
       }
-  
-      img {
-        width: 115%;
-        position: absolute;
-        right: 0;
-  
+
+      @include md {
+        padding: 0;
+      }
+
+      @include sm {
+        justify-content: flex-start;
+      }
+
+      .title {
+        font-size: 64px;
+
         @include lg {
-          width: 105%;
+          font-size: 48px;
+        }
+      }
+
+      .boxes {
+        display: flex;
+        justify-content: space-between;
+
+        @include sm {
+          display: none;
+        }
+
+        h1 {
+          font-size: 36px;
+
+          @include lg {
+            font-size: 32px;
+          }
+        }
+
+        h2 {
+          font-size: 20px;
+          font-weight: 300;
         }
       }
     }
   }
+
+  .imgContainer {
+    flex: 2;
+    background-color: #fcf5f3;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    @include md {
+      display: none;
+    }
+
+    img {
+      width: 115%;
+      position: absolute;
+      right: 0;
+
+      @include lg {
+        width: 105%;
+      }
+    }
+  }
+}
+
+.recommendationsSection {
+  width: 100%;
+  padding: 60px 40px;
+  background-color: #f9f9f9;
+  margin-top: 40px;
+
+  h2 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    }
+  }
+
+  .recommendationsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @include md {
+    padding: 40px 20px;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+  }
+}
