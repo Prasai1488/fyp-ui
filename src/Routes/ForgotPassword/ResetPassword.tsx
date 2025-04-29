@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./ResetPassword.scss";
+import "./resetPassword.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import { Link } from "react-router-dom";
