@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./ForgotPassword.scss";
+import "./forgotPassword.scss";
 import { Link } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 
