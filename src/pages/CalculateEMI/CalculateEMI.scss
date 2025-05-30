@@ -1,0 +1,80 @@
+.emi-container {
+  padding: 40px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: sans-serif;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .emi-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .emi-form {
+      flex: 1;
+      padding: 20px;
+      background-color: #f8f9fa;
+      min-width: 300px;
+
+      h3 {
+        background-color: #fece51;
+        color: black;
+        padding: 10px;
+        margin: -20px -20px 20px -20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 15px;
+        font-size: 14px;
+
+        input {
+          display: block;
+          width: 100%;
+          padding: 8px;
+          margin-top: 5px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+      }
+
+      .emi-radio {
+        margin-top: 10px;
+
+        label {
+          margin-right: 15px;
+          input {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+    .emi-results {
+      flex: 1;
+      padding: 20px;
+      border-left: 1px solid #ccc;
+      min-width: 300px;
+
+      div {
+        margin-bottom: 30px;
+
+        h4 {
+          font-size: 16px;
+          color: #152c4e;
+        }
+
+        p {
+          font-size: 24px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
