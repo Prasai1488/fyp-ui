@@ -31,7 +31,15 @@ function Navbar() {
           <span>GorkhaHomes</span>
         </a>
         <a href="/">Home</a>
-        <Link to="/calculate-mortgage">Calculate-Mortgage</Link>
+        <div className="dropdown">
+          <button className="dropbtn">Tools</button>
+          <div className="dropdown-content">
+            <Link to="/calendar">Calendar</Link>
+            <Link to="/unit-naptol">Unit / Naptol</Link>
+            <Link to="/calculate-emi">EMI Calculator</Link>
+          </div>
+        </div>
+
         <Link to="/testimonials">Testimonials</Link>
         {currentUser && currentUser.username === "admin" && (
           <a href="/admin">Dashboard</a>

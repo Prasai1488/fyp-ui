@@ -116,7 +116,7 @@ const AdminPendingPosts = () => {
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>
             <h2>{selectedPost.title}</h2>
             <p>
-              <strong>Price:</strong> ${selectedPost.price}
+              <strong>Price:</strong> Rs.{selectedPost.price}
             </p>
             <p>
               <strong>Address:</strong> {selectedPost.address}

@@ -288,7 +288,7 @@ function NewPostPage() {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ isSubmitting, errors, touched }) => (
+            {({ isSubmitting, errors, touched, values }) => (
               <Form>
                 {/* Basic Details */}
                 <h2>Basic Details</h2>
@@ -339,24 +339,40 @@ function NewPostPage() {
                   <Field id="city" name="city" type="text" />
                   <ErrorMessage name="city" component="div" className="error" />
                 </div>
-                <div className="item">
-                  <label htmlFor="bedroom">Bedroom Number</label>
-                  <Field min={0} id="bedroom" name="bedroom" type="number" />
-                  <ErrorMessage
-                    name="bedroom"
-                    component="div"
-                    className="error"
-                  />
-                </div>
-                <div className="item">
-                  <label htmlFor="bathroom">Bathroom Number</label>
-                  <Field min={0} id="bathroom" name="bathroom" type="number" />
-                  <ErrorMessage
-                    name="bathroom"
-                    component="div"
-                    className="error"
-                  />
-                </div>
+                {(values.property === "apartment" ||
+                  values.property === "house") && (
+                  <>
+                    <div className="item">
+                      <label htmlFor="bedroom">Bedroom Number</label>
+                      <Field
+                        min={0}
+                        id="bedroom"
+                        name="bedroom"
+                        type="number"
+                      />
+                      <ErrorMessage
+                        name="bedroom"
+                        component="div"
+                        className="error"
+                      />
+                    </div>
+                    <div className="item">
+                      <label htmlFor="bathroom">Bathroom Number</label>
+                      <Field
+                        min={0}
+                        id="bathroom"
+                        name="bathroom"
+                        type="number"
+                      />
+                      <ErrorMessage
+                        name="bathroom"
+                        component="div"
+                        className="error"
+                      />
+                    </div>
+                  </>
+                )}
+
                 <div className="item">
                   <label>Select Property Location on Map:</label>
                   <MapContainer
@@ -396,30 +412,36 @@ function NewPostPage() {
                   </Field>
                 </div>
 
-                <div className="item">
-                  <label htmlFor="utilities">Utilities Policy</label>
-                  <Field as="select" name="utilities">
-                    <option value="owner">Owner is responsible</option>
-                    <option value="tenant">Tenant is responsible</option>
-                    <option value="shared">Shared</option>
-                  </Field>
-                </div>
-                <div className="item">
-                  <label htmlFor="pet">Pet Policy</label>
-                  <Field as="select" name="pet">
-                    <option value="allowed">Allowed</option>
-                    <option value="not allowed">Not Allowed</option>
-                  </Field>
-                </div>
-                <div className="item">
-                  <label htmlFor="income">Income Policy</label>
-                  <Field
-                    id="income"
-                    name="income"
-                    type="text"
-                    placeholder="Income Policy"
-                  />
-                </div>
+                {(values.property === "apartment" ||
+                  values.property === "house") && (
+                  <>
+                    <div className="item">
+                      <label htmlFor="utilities">Utilities Policy</label>
+                      <Field as="select" name="utilities">
+                        <option value="owner">Owner is responsible</option>
+                        <option value="tenant">Tenant is responsible</option>
+                        <option value="shared">Shared</option>
+                      </Field>
+                    </div>
+                    <div className="item">
+                      <label htmlFor="pet">Pet Policy</label>
+                      <Field as="select" name="pet">
+                        <option value="allowed">Allowed</option>
+                        <option value="not allowed">Not Allowed</option>
+                      </Field>
+                    </div>
+                    <div className="item">
+                      <label htmlFor="income">Income Policy</label>
+                      <Field
+                        id="income"
+                        name="income"
+                        type="text"
+                        placeholder="Income Policy"
+                      />
+                    </div>
+                  </>
+                )}
+
                 <div className="item">
                   <label htmlFor="size">Total Size (sqft)</label>
                   <Field min={0} id="size" name="size" type="number" />
@@ -436,15 +458,19 @@ function NewPostPage() {
                     type="number"
                   />
                 </div>
-                <div className="item">
-                  <label htmlFor="buildUpArea">Build Up Area (sqft)</label>
-                  <Field
-                    min={0}
-                    id="buildUpArea"
-                    name="buildUpArea"
-                    type="number"
-                  />
-                </div>
+                {(values.property === "apartment" ||
+                  values.property === "house") && (
+                  <div className="item">
+                    <label htmlFor="buildUpArea">Build Up Area (sqft)</label>
+                    <Field
+                      min={0}
+                      id="buildUpArea"
+                      name="buildUpArea"
+                      type="number"
+                    />
+                  </div>
+                )}
+
                 <div className="item">
                   <label htmlFor="dimension">Dimension</label>
                   <Field
@@ -487,50 +513,67 @@ function NewPostPage() {
                 </div>
 
                 {/* Additional Details Section */}
-                <h2>Additional Details</h2>
-                <div className="item">
-                  <label htmlFor="kitchen">Number of Kitchens</label>
-                  <Field min={0} id="kitchen" name="kitchen" type="number" />
-                </div>
-                <div className="item">
-                  <label htmlFor="livingRoom">Number of Living Rooms</label>
-                  <Field
-                    min={0}
-                    id="livingRoom"
-                    name="livingRoom"
-                    type="number"
-                  />
-                </div>
-                <div className="item">
-                  <label htmlFor="parking">Number of Parking Spaces</label>
-                  <Field min={0} id="parking" name="parking" type="number" />
-                </div>
-                <div className="item">
-                  <label htmlFor="totalFloors">Total Floors</label>
-                  <Field
-                    min={0}
-                    id="totalFloors"
-                    name="totalFloors"
-                    type="number"
-                  />
-                </div>
-                <div className="item">
-                  <label htmlFor="builtYear">Built Year</label>
-                  <Field
-                    id="builtYear"
-                    name="builtYear"
-                    type="text"
-                    placeholder="e.g., 2015"
-                  />
-                </div>
-                <div className="item">
-                  <label htmlFor="furnishing">Furnishing</label>
-                  <Field as="select" name="furnishing">
-                    <option value="unfurnished">Unfurnished</option>
-                    <option value="semi-furnished">Semi-furnished</option>
-                    <option value="fully-furnished">Fully-furnished</option>
-                  </Field>
-                </div>
+
+                {(values.property === "apartment" ||
+                  values.property === "house") && (
+                  <>
+                    <h2>Additional Details</h2>
+                    <div className="item">
+                      <label htmlFor="kitchen">Number of Kitchens</label>
+                      <Field
+                        min={0}
+                        id="kitchen"
+                        name="kitchen"
+                        type="number"
+                      />
+                    </div>
+                    <div className="item">
+                      <label htmlFor="livingRoom">Number of Living Rooms</label>
+                      <Field
+                        min={0}
+                        id="livingRoom"
+                        name="livingRoom"
+                        type="number"
+                      />
+                    </div>
+                    <div className="item">
+                      <label htmlFor="parking">Number of Parking Spaces</label>
+                      <Field
+                        min={0}
+                        id="parking"
+                        name="parking"
+                        type="number"
+                      />
+                    </div>
+                    <div className="item">
+                      <label htmlFor="totalFloors">Total Floors</label>
+                      <Field
+                        min={0}
+                        id="totalFloors"
+                        name="totalFloors"
+                        type="number"
+                      />
+                    </div>
+                    <div className="item">
+                      <label htmlFor="builtYear">Built Year</label>
+                      <Field
+                        id="builtYear"
+                        name="builtYear"
+                        type="text"
+                        placeholder="e.g., 2015"
+                      />
+                    </div>
+                    <div className="item">
+                      <label htmlFor="furnishing">Furnishing</label>
+                      <Field as="select" name="furnishing">
+                        <option value="unfurnished">Unfurnished</option>
+                        <option value="semi-furnished">Semi-furnished</option>
+                        <option value="fully-furnished">Fully-furnished</option>
+                      </Field>
+                    </div>
+                  </>
+                )}
+
                 <div className="item">
                   <label htmlFor="plotNumber">Plot Number</label>
                   <Field id="plotNumber" name="plotNumber" type="text" />
@@ -545,83 +588,88 @@ function NewPostPage() {
                 </div>
 
                 {/* Amenities */}
-                <div className="item amenities">
-                  <label>Amenities</label>
-                  <div className="checkbox-group">
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="wifi"
-                        value="wifi"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="wifi">WiFi</label>
-                    </div>
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="ac"
-                        value="ac"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="ac">AC</label>
-                    </div>
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="garden"
-                        value="garden"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="garden">Garden</label>
-                    </div>
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="pool"
-                        value="pool"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="pool">Swimming Pool</label>
-                    </div>
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="gym-amenity"
-                        value="gym"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="gym-amenity">Gym</label>
-                    </div>
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="elevator"
-                        value="elevator"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="elevator">Elevator</label>
-                    </div>
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="security"
-                        value="security"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="security">24/7 Security</label>
-                    </div>
-                    <div className="checkbox-item">
-                      <input
-                        type="checkbox"
-                        id="balcony"
-                        value="balcony"
-                        onChange={handleAmenityChange}
-                      />
-                      <label htmlFor="balcony">Balcony</label>
+                {(values.property === "apartment" ||
+                  values.property === "house") && (
+                  <div className="item amenities">
+                    <label>Amenities</label>
+                    <div className="checkbox-group">
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="wifi"
+                          value="wifi"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="wifi">WiFi</label>
+                      </div>
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="ac"
+                          value="ac"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="ac">AC</label>
+                      </div>
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="garden"
+                          value="garden"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="garden">Garden</label>
+                      </div>
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="pool"
+                          value="pool"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="pool">Swimming Pool</label>
+                      </div>
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="gym-amenity"
+                          value="gym"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="gym-amenity">Gym</label>
+                      </div>
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="elevator"
+                          value="elevator"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="elevator">Elevator</label>
+                      </div>
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="security"
+                          value="security"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="security">24/7 Security</label>
+                      </div>
+                      <div className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id="balcony"
+                          value="balcony"
+                          onChange={handleAmenityChange}
+                        />
+                        <label htmlFor="balcony">Balcony</label>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {/* Property Status */}
 
                 {/* Nearby Location Details */}
                 <h2>Nearby Location Details</h2>
